@@ -1,0 +1,93 @@
+{% extends 'shop/base.html' %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/shop/styles/single_styles.css">
+<style>
+    #img-no-orders{
+        width: 30%;
+        height: 30%;
+        padding-bottom: 20px;
+    }
+    .order-list li{
+        margin-right: 1rem;
+    }
+    .orderitem-list li{
+        padding-bottom: 1rem;
+    }
+    .orderspan{
+        min-width: 20rem;
+        display: inline-block;
+    }
+    .card-body button {
+    color: white;
+    background-color: #41909e;
+  }
+
+    .card-body button:hover {
+    color: black;
+    background-color: #1aa5e6;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container container-manual">
+    <h3>My Orders</h3>
+    <h6>Total - {{order_items|length}} Order(s)</h6>
+    {% if order_items %}
+    <div class="container" style="padding-top: 1rem;margin-left: 1rem;">
+        {% for orders in order_items %}
+        <div class="row" style="padding-bottom: 1rem;">
+        <div class="card">
+            <div class="card-header">
+              <ul class="nav order-list nav-pills card-header-pills">
+                <li class="nav-item">
+                    <h6>Order Id. {{orders.0.order_id}}</h6>
+                </li>
+                <li class="nav-item">
+                    <h6>Amount - &#8377;{{orders.0.totalamt}}</h6>
+                </li>
+                <li class="nav-item">
+                    <h6>Transaction Mode - {{orders.0.trans_mode}}</h6>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+                <ol class="orderitem-list">
+                    {% for orderItem in orders.1 %}
+                    <li>
+                        <span class="orderspan">
+                            <h6>{{orderItem.prod_id.prod_name}}</h6>
+                        </span>
+                        <span class="orderspan">
+                            <h6>&#8377;{{orderItem.prod_id.price}}</h6>
+                        </span>
+                        <span class="orderspan">
+                            <a href="{% url 'product' orderItem.prod_id.id%}"><button class="btn btn-sm">View Product</button></a>
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+</div>
+    {% else %}
+        <section class="text-center">
+            <p class="lead">You have no orders to show. Start ordering with us.</p>
+        </section>
+    {% endif %}
+</div>
+
+{% endblock %}

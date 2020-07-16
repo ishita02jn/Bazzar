@@ -1,0 +1,83 @@
+{% extends 'shop/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/shop/styles/main_styles.css">
+
+<style>
+
+.containers
+{
+  width:550px;
+  height:100%;
+  margin-left:10px;
+}
+
+.pic
+{
+  box-shadow: 6px 6px 7px #888888;
+  width:300px;
+  height:300px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom:100px;
+  margin-left:135px;
+}
+
+.content
+{
+  height:100%;
+  width:500px;
+}
+
+p
+{
+  font-family: 'Dancing Script', cursive;
+}
+
+.contentHead
+{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+sup
+{
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-style: italic;
+  font-size:smaller;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="containers col-lg-6 col-md-6">
+      
+      <div class="pic">
+          <img src="../../static/shop/images/banner_1.jpg" >
+      </div>
+      <div></div>
+    </div>
+    
+    <div class="content col-md-offset-6 col-lg-offset-6">
+      <h2 class=" text-align-center">ABOUT ME</h2>
+      
+      <p>Hi There, <br/><br/>
+        I'm Ishita Jain, a Computer Science Undergraduate and a Full Stack Developer.
+        <br/><br/>
+        This Shopping app is made with Django, my first project on this framework.
+        <br/><br/>
+        <p>Contains all basic features present in an ecommerce website</p>
+    </div>
+    </div>   
+    
+{% endblock %}

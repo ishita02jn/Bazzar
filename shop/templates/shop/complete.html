@@ -1,0 +1,28 @@
+{% ifequal "TXN_SUCCESS" response.STATUS%}
+<div class="container pb-5 mb-sm-4">
+    <div class="pt-5">
+      <div class="card py-3 mt-sm-3">
+        <div class="card-body text-center">
+          <h2 class="h4 pb-3" style="color: green;">Thank you for your order!</h2>
+          <p class="font-size-sm mb-2">Your order has been placed and will be processed as soon as possible.</p>
+          <p class="font-size-sm mb-2">Make sure you make note of your order number, which is <span class="font-weight-medium">{{response.ORDERID}}</span></p>
+          <p class="font-size-sm">You will be receiving an email shortly with confirmation of your order.</p>
+          <a class="btn mt-3 mr-3" href="{% url 'home' %}">Go back shopping</a>
+        </div>
+      </div>
+    </div>
+</div>
+{% else %}
+<div class="container pb-5 mb-sm-4">
+    <div class="pt-5">
+      <div class="card py-3 mt-sm-3">
+        <div class="card-body text-center">
+          <h2 class="h4 pb-3" style="color: red;">Oops! Something went wrong..</h2>
+          <p class="font-size-sm mb-2">{{response.RESPMSG}}.</p>
+          <p class="font-size-sm">Please process your payment again.</p>
+          <a class="btn mt-3 mr-3" href="{% url 'cart' %}">Try again</a>
+        </div>
+      </div>
+    </div>
+</div>
+{% endifequal %}

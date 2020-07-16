@@ -1,0 +1,84 @@
+{% extends 'shop/base.html' %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/shop/styles/single_styles.css">
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 order-md-1 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span>Order Summary</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Sub-total</h6>
+                        <small class="text-muted">Your cart total</small>
+                    </div>
+                    <span class="text-muted">&#8377; {{sub_total}}</span>
+                </li>
+                {% if discount %}
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Discount</h6>
+                        <small class="text-muted">Profit on MyKart</small>
+                    </div>
+                    <span class="text-muted">&#8377; {{discount}}</span>
+                </li>
+                {% else %}
+                
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Discount</h6>
+                        <small style="color: red;">(Coupon not applied.)</small>
+                    </div>
+                    <span class="text-muted">&#8377; {{discount}}</span>
+                </li>
+                {% endif %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6 class="my-0">Total</h6>
+                        <small class="text-muted">You have to pay</small>
+                    </div>
+                    <span class="text-muted"><strong style="color: black;">&#8377; {{total}}</strong></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 order-md-2 my-0">
+            <form method="POST" action="{% url 'shop_payment' %}">
+                {% csrf_token %}
+                <h4 class="mb-3">Payment</h4>
+                <div class="d-block my-4">
+                    <h6 class="mb-3">Choose your mode of payment</h6>
+                    <div class="custom-radio">
+                        <input id="paynow" name="paymentMethod" type="radio" value="paynow" checked=""
+                            required="">
+                        <label class="custom-control-label" for="paynow">Pay now</label>
+                        <hr class="mb-2">
+                    </div>
+                    <div class="custom-radio">
+                        <input id="paydel" name="paymentMethod" type="radio" value="paydel" required="">
+                        <label class="custom-control-label" for="paydel">Pay on delivery</label>
+                    </div>
+                </div>
+                <hr class="mb-2">
+                <button class="btn btn-lg btn-block" type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

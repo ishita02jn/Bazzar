@@ -1,0 +1,143 @@
+{% extends 'shop/base.html' %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../../static/shop/styles/single_styles.css">
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="{% url 'cart'%}">Cart</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Address</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    {% if addresses %}
+    <div>
+        <div class="row">
+            <div class="col">
+                <h3>Select Address</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            {% for address in addresses %}
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">{{address.full_name}}</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>{{address.address}}</li>
+                                <li>{{address.city}}</li>
+                                <li>{{address.pincode}}</li>
+                                <li>{{address.state}}</li>
+                            </ul>
+                            <br>
+                            <form action="{% url 'deliver' %}" method="POST">
+                                {% csrf_token %}
+                                    <input type="hidden" value="{{address.id}}" name="addressid">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-success btn-sm">Deliver to this Address</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    {% endif %}
+    <main class="my-form">
+        <div class="row">
+            <div class="col">
+                <h3>Add New Address</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div>
+                {{errmsg}}
+                <form method="post" action="{% url 'deliver'%}">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="first_name" class="col-md-4 col-form-label text-md-right">Full
+                            Name</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="full_name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mobile" class="col-md-4 col-form-label text-md-right">Mobile
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="mobile">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="pincode" class="col-md-4 col-form-label text-md-right">Zipcode/Postal</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="pincode">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="address" class="col-md-4 col-form-label text-md-right">Address
+                        </label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" name="address"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="city">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">State</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="state">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 offset-md-2">
+                        <button type="submit" class="btn btn-success">
+                            Deliver to this address
+                        </button>
+                    </div>
+            </div>
+            </form>
+        </div>
+
+</main>
+</div>
+{% endblock %}
